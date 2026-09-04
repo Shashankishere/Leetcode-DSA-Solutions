@@ -1,1 +1,26 @@
-40. Combination Sum II
+class Solution {
+public:
+    vector<vector<int>> combinationSum2(vector<int>& candidates, int target) {
+        vector<vector<int>> ans;
+        sort(candidates.begin(), candidates.end());
+        function<void(int, int, vector<int>&)> dfs =
+            [&](int start, int target, vector<int>& curr) {
+                if (target == 0) {
+                    ans.push_back(curr);
+                    return;
+                }
+                for (int i = start; i < candidates.size(); i++) {
+                    if (i > start && candidates[i] == candidates[i - 1])
+                        continue;
+                    if (candidates[i] > target)
+                        break;
+                    curr.push_back(candidates[i]);
+                    dfs(i + 1, target - candidates[i], curr);
+                    curr.pop_back();
+                }
+            };
+        vector<int> curr;
+        dfs(0, target, curr);
+        return ans;
+    }
+};
