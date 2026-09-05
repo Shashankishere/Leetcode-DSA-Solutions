@@ -1,1 +1,26 @@
-216. Combination Sum III216. 
+class Solution {
+public:
+    vector<vector<int>> combinationSum3(int k, int n) {
+        vector<vector<int>> ans;
+        vector<int> current;
+        backtrack(1, k, n, current, ans);
+        return ans;
+    }
+private:
+    void backtrack(int start, int k, int target,
+                   vector<int>& current,
+                   vector<vector<int>>& ans) {
+        if (current.size() == k) {
+            if (target == 0)
+                ans.push_back(current);
+            return;
+        }
+        for (int i = start; i <= 9; i++) {
+            if (i > target)
+                break;
+            current.push_back(i);
+            backtrack(i + 1, k, target - i, current, ans);
+            current.pop_back();
+        }
+    }
+};
