@@ -1,1 +1,23 @@
-2807. Insert Greatest Common Divisors in Linked List
+class Solution {
+public:
+    int findGCD(int a, int b) {
+        while (b != 0) {
+            int temp = b;
+            b = a % b;
+            a = temp;
+        }
+        return a;
+    }
+    ListNode* insertGreatestCommonDivisors(ListNode* head) {
+        ListNode* curr = head;
+        while (curr != NULL && curr->next != NULL) {
+            ListNode* nextNode = curr->next;
+            int g = findGCD(curr->val, nextNode->val);
+            ListNode* newNode = new ListNode(g);
+            curr->next = newNode;
+            newNode->next = nextNode;
+            curr = nextNode;
+        }
+        return head;
+    }
+};
