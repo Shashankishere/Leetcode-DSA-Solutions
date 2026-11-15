@@ -1,1 +1,11 @@
-3789. Minimum Cost to Acquire Required Items
+class Solution {
+public:
+    long long minimumCost(int cost1, int cost2, int costBoth, int need1, int need2) {
+        long long m = min(need1, need2);
+        long long M = max(need1, need2);
+        long long ans1 = 1LL * need1 * cost1 + 1LL * need2 * cost2;
+        long long ans2 = m * costBoth + 1LL * (need1 - m) * cost1 + 1LL * (need2 - m) * cost2;
+        long long ans3 = M * costBoth;
+        return min({ans1, ans2, ans3});
+    }
+};
