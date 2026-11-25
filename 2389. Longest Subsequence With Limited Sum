@@ -1,1 +1,21 @@
-2389. Longest Subsequence With Limited Sum
+class Solution {
+public:
+    vector<int> answerQueries(vector<int>& nums,vector<int>& queries) {
+        sort(nums.begin(), nums.end());
+        vector<int> ans;
+        for (int q : queries) {
+            int sum = 0;
+            int count = 0;
+            for (int x : nums) {
+                if (sum + x <= q) {
+                    sum += x;
+                    count++;
+                } else {
+                    break;
+                }
+            }
+            ans.push_back(count);
+        }
+        return ans;
+    }
+};
