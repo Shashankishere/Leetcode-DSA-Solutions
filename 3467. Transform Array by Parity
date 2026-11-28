@@ -1,1 +1,19 @@
-3467. Transform Array by Parity
+class Solution {
+public:
+    vector<int> transformArray(vector<int>& nums) {
+        int even = 0;
+        int n = nums.size();
+        for (int x : nums) {
+            if (x % 2 == 0) {
+                even++;
+            }
+        }
+        for (int i = 0; i < even; i++) {
+            nums[i] = 0;
+        }
+        for (int i = even; i < n; i++) {
+            nums[i] = 1;
+        }
+        return nums;
+    }
+};
